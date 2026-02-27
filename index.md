@@ -4,4 +4,4 @@
 - add demos here
 
 ## Assignments
-- add assignments here
+- [Interactive scene](interactive-scene)
