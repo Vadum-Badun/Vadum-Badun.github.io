@@ -222,7 +222,7 @@ function Bar(){
     //Increses the fill each frame and gives a game over
     this.update = () => {
         if(this.f < this.l){
-            this.f += 1;
+            this.f += 3.2;
         } else {
             isDead = true;
         }
