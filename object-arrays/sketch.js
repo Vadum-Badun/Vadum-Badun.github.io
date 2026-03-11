@@ -5,6 +5,8 @@
 //Extra for Experts: Usage of HTML DOM elements, such entering the user name
 //Extra for Experts: Usage of local storage to save the scores of players
 
+//Credentials: https://www.reddit.com/r/p5js/comments/1jdtnfr/how_to_remove_input_box/ 
+// https://stackoverflow.com/questions/48936886/how-do-i-save-an-array-to-a-file-and-manipulate-it-from-within-my-code 
 
 let player;
 
@@ -24,96 +26,103 @@ function setup(){
   bar = new Bar();
   places.push(new Place());
 
+ 
   myInput = createInput('Enter your name');
   myInput.position(width/2 -90, height/2);
   submitButton = createButton('Submit');
   submitButton.position(myInput.x + 60, height / 2 + 50);
   submitButton.mousePressed(saveInput);
+  
+
 }
 
 function saveInput(){
   let userInput = myInput.value();
+  userList.push(userInput);
   if(userList.length > 0){
-    userList.push(userInput);
-    input.value('');
+    myInput.remove();
+    submitButton.remove();
   }
+  input.value('');
+  //In development
+  //localStorage.setItem('userList', data);
 }
 
 function draw(){
   background(220);
   console.log(userList);
-//   if(!isDead){
+  if(!isDead && userList.length > 0){
 
-//     //Timer Bar
-//     bar.display();
-//     bar.update();
+    //Timer Bar
+    bar.display();
+    bar.update();
 
-//     //Places
-//     for(let i = 0; i < places.length; i++){
-//       //Draws the squares
-//       places[i].display();
+    //Places
+    for(let i = 0; i < places.length; i++){
+      //Draws the squares
+      places[i].display();
 
-//       //Animation of falling down
-//       if(!places[i].active){
-//         places[i].spawn();
-//       }
-//       else if(places[i].guessed){
-//         // Slide it sideways after a correct guess
-//         places[i].transform(places[i].dir);
-//       }
-//     }
+      //Animation of falling down
+      if(!places[i].active){
+        places[i].spawn();
+      }
+      else if(places[i].guessed){
+        // Slide it sideways after a correct guess
+        places[i].transform(places[i].dir);
+      }
+    }
 
-//     //Player displaying
-//     player.display();
+    //Player displaying
+    player.display();
 
-//     //Points
-//     textSize(18);
-//     fill(30);
-//     textAlign(LEFT);
-//     text(`Points : ${points}`, 20, 30);
+    //Points
+    textSize(18);
+    fill(30);
+    textAlign(LEFT);
+    text(`Points : ${points}`, 20, 30);
 
-//     //Controls hint
-//     textSize(14);
-//     fill(80);
-//     textAlign(CENTER);
-//     text("A = Left   |   D = Right", width / 2, height - 15);
+    //Controls hint
+    textSize(14);
+    fill(80);
+    textAlign(CENTER);
+    text("A = Left   |   D = Right", width / 2, height - 15);
 
-//   } 
+  } 
 
-//   //Game over Screen
-//   else {
-//     //Stops the draw loop
-//     noLoop();
+  //Game over Screen
+  else if(isDead){
+    //Stops the draw loop
+    noLoop();
 
-//     textAlign(CENTER);
-//     fill(30);
-//     textSize(40);
-//     text("Oops, you're dead!", width/2, height/2 - 40);
+    textAlign(CENTER);
+    fill(30);
+    textSize(40);
+    text("Oops, you're dead!", width/2, height/2 - 40);
 
-//     textSize(30);
-//     text(`Points : ${points}`, width/2, height/2);
+    textSize(30);
+    text(`Points : ${points}`, width/2, height/2);
 
-//     // Creates only one button, so it doesn't duplicate
-//     if(button === null){
-//       button = createButton('Play Again');
-//       button.position(width/2 - 50, height/2 + 30);
-//       //Once pressed, restarts the game
-//       button.mousePressed(restart);
-//     }
-//   }
-// }
+    // Creates only one button, so it doesn't duplicate
+    if(button === null){
+      button = createButton('Play Again');
+      button.position(width/2 - 50, height/2 + 30);
+      //Once pressed, restarts the game
+      button.mousePressed(restart);
+    }
+  }
+}
 
-// // Keyboard input, listens for A (left) or D (right) key presses
-// function keyPressed(){
-//   if(!isDead && places[0].active){
-//     // A key = left, D key = right
-//     if(key === 'a' || key === 'A'){
-//       places[0].move("left");
-//     }
-//     else if(key === 'd' || key === 'D'){
-//       places[0].move("right");
-//     }
-//   }
+// Keyboard input, listens for A (left) or D (right) key presses
+function keyPressed(){
+  if(!isDead && places[0].active){
+    // A key = left, D key = right
+    if(key === 'a' || key === 'A'){
+      places[0].move("left");
+    }
+    else if(key === 'd' || key === 'D'){
+      places[0].move("right");
+    }
+  }
 }
 
 
