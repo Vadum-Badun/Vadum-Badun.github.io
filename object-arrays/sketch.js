@@ -43,7 +43,7 @@ function saveInput(){
     myInput.remove();
     submitButton.remove();
   }
-  input.value('');
+  myInput.value('');
   //In development
   //localStorage.setItem('userList', data);
 }
