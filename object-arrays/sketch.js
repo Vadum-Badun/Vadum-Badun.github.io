@@ -8,6 +8,16 @@
 //Credentials: https://www.reddit.com/r/p5js/comments/1jdtnfr/how_to_remove_input_box/ 
 // https://stackoverflow.com/questions/48936886/how-do-i-save-an-array-to-a-file-and-manipulate-it-from-within-my-code 
 
+//https://github.com/quinton-ashley/p5play 
+//<script src="https://cdn.jsdelivr.net/gh/quarks/canvasGUI/dist/lib/gui.min.js">
+//</script>
+
+//NOT FOR THIS PROJECT
+// https://p5party.org/
+
+
+
+
 let player;
 
 //Array holding Place objects (the falling squares the player must react to) 
