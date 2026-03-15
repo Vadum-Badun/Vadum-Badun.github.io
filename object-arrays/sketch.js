@@ -2,20 +2,26 @@
 // Vadym Kolomiiets
 // 10/03/2026
 //
-//Extra for Experts: Usage of HTML DOM elements, such entering the user name
+//Extra for Experts: Usage of HTML DOM elements, such as entering the user name
 //Extra for Experts: Usage of local storage to save the scores of players
+// IMPORTANT NOTE FOR Mr. Schellenberg: As you could notice, it's just a better version
+//of previous project. So you should consider ONLY changes on lines 26 until line 189
+//as it's the only part where new functions were implemented. I don't want to waste your time for no reason!
 
-//Credentials: https://www.reddit.com/r/p5js/comments/1jdtnfr/how_to_remove_input_box/ 
+// --------------------------CREDENTIALS SECTION--------------------------------------------
+
+//https://www.reddit.com/r/p5js/comments/1jdtnfr/how_to_remove_input_box/ 
 // https://stackoverflow.com/questions/48936886/how-do-i-save-an-array-to-a-file-and-manipulate-it-from-within-my-code 
 
-//https://github.com/quinton-ashley/p5play 
-//<script src="https://cdn.jsdelivr.net/gh/quarks/canvasGUI/dist/lib/gui.min.js">
-//</script>
+//LOCAL STORAGES:
+//https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem
+//https://blog.logrocket.com/localstorage-javascript-complete-guide/
+//https://p5js.org/reference/p5/storeItem/
+//https://thecodingtrain.com/tracks/p5-tips-and-tricks/more-p5/local-storage
+//https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt 
 
-//NOT FOR THIS PROJECT
-// https://p5party.org/
-
-
+//---------------------------------END OF CREDENTIALS---------------------------------------------------------------------------
 
 
 let player;
@@ -29,6 +35,8 @@ let submitButton;
 let button = null;
 let userList = [];
 let myInput;
+let currentUser = null;
+let gameStart = false;
 
 function setup(){
   createCanvas(500, 500);
@@ -36,6 +44,8 @@ function setup(){
   bar = new Bar();
   places.push(new Place());
 
+
+  loadUsers();
  
   myInput = createInput('Enter your name');
   myInput.position(width/2 -90, height/2);
@@ -48,19 +58,62 @@ function setup(){
 
 function saveInput(){
   let userInput = myInput.value();
+
+  //We shouldn't allow empty names, exit the function:
+  if(userInput === '') return;
+    
+  currentUser = userInput;
+
+  if(!userList.includes(userInput)){
   userList.push(userInput);
-  if(userList.length > 0){
-    myInput.remove();
-    submitButton.remove();
+  saveUsers();
+    
   }
+
+  myInput.remove();
+  submitButton.remove();
   myInput.value('');
-  //In development
-  //localStorage.setItem('userList', data);
+
+  gameStart = true;
+}
+
+//Saving userList array to local storage
+function saveUsers(){
+localStorage.setItem(`userList`, JSON.stringify(userList));
+}
+
+//Loads saved user list from local storage into the array
+function loadUsers(){
+  let stored = localStorage.getItem('userList');
+  if(stored){
+  userList = JSON.parse(stored);
+  }
+}
+
+//Return stored best score for specific username
+function getBestScore(name){
+let key = `bestScore_` + name;
+let stored = localStorage.getItem(key);
+return stored ? parseInt(stored) : 0;
+}
+
+//Updates the best for user
+function updateBestScore(name, score){
+let key = `bestScore_` + name;
+let current = getBestScore(name);
+if(score > current){
+localStorage.setItem(key,score);
+}
+  
 }
 
 function draw(){
+  //Prevents game from starting before we enter username
+  if(!gameStart){
+    return;
+  }
+  
   background(220);
-  console.log(userList);
   if(!isDead && userList.length > 0){
 
     //Timer Bar
@@ -91,6 +144,16 @@ function draw(){
     textAlign(LEFT);
     text(`Points : ${points}`, 20, 30);
 
+    //Show user's best score
+    if(currentUser !== null){
+    let best = getBestScore(currentUser);
+    textAlign(RIGHT);
+    textSize(18);
+    fill(30);
+    text(`Best: ${best} | Player: ${currentUser}`, width - 10, 30);
+    }
+    
+
     //Controls hint
     textSize(14);
     fill(80);
@@ -101,6 +164,12 @@ function draw(){
 
   //Game over Screen
   else if(isDead){
+
+  //Save best score
+    if(currentUser !== null){
+      updateBestScore(currentUser, points);
+    }
+    
     //Stops the draw loop
     noLoop();
 
@@ -112,10 +181,18 @@ function draw(){
     textSize(30);
     text(`Points : ${points}`, width/2, height/2);
 
+
+    if(currentUser !== null){
+      let best = getBestScore(currentUser);
+      textSize(25);
+      fill(30)
+      text(`Best Score: ${best}`, width / 2, height / 2 + 30);
+    }
+
     // Creates only one button, so it doesn't duplicate
     if(button === null){
       button = createButton('Play Again');
-      button.position(width/2 - 50, height/2 + 30);
+      button.position(width/2 - 50, height/2 + 45);
       //Once pressed, restarts the game
       button.mousePressed(restart);
     }
