@@ -60,13 +60,15 @@ function saveInput(){
   let userInput = myInput.value();
 
   //We shouldn't allow empty names, exit the function:
-  if(userInput === '') return;
+  if(userInput === '') {
+    return;
+  }
     
   currentUser = userInput;
 
   if(!userList.includes(userInput)){
-  userList.push(userInput);
-  saveUsers();
+    userList.push(userInput);
+    saveUsers();
     
   }
 
@@ -79,31 +81,31 @@ function saveInput(){
 
 //Saving userList array to local storage
 function saveUsers(){
-localStorage.setItem(`userList`, JSON.stringify(userList));
+  localStorage.setItem(`userList`, JSON.stringify(userList));
 }
 
 //Loads saved user list from local storage into the array
 function loadUsers(){
   let stored = localStorage.getItem('userList');
   if(stored){
-  userList = JSON.parse(stored);
+    userList = JSON.parse(stored);
   }
 }
 
 //Return stored best score for specific username
 function getBestScore(name){
-let key = `bestScore_` + name;
-let stored = localStorage.getItem(key);
-return stored ? parseInt(stored) : 0;
+  let key = `bestScore_` + name;
+  let stored = localStorage.getItem(key);
+  return stored ? parseInt(stored) : 0;
 }
 
 //Updates the best for user
 function updateBestScore(name, score){
-let key = `bestScore_` + name;
-let current = getBestScore(name);
-if(score > current){
-localStorage.setItem(key,score);
-}
+  let key = `bestScore_` + name;
+  let current = getBestScore(name);
+  if(score > current){
+    localStorage.setItem(key,score);
+  }
   
 }
 
@@ -146,11 +148,11 @@ function draw(){
 
     //Show user's best score
     if(currentUser !== null){
-    let best = getBestScore(currentUser);
-    textAlign(RIGHT);
-    textSize(18);
-    fill(30);
-    text(`Best: ${best} | Player: ${currentUser}`, width - 10, 30);
+      let best = getBestScore(currentUser);
+      textAlign(CENTER);
+      textSize(16);
+      fill(30);
+      text(`Best: ${best} | Player: ${currentUser}`, width / 2 , 60);
     }
     
 
@@ -165,7 +167,7 @@ function draw(){
   //Game over Screen
   else if(isDead){
 
-  //Save best score
+    //Save best score
     if(currentUser !== null){
       updateBestScore(currentUser, points);
     }
@@ -185,7 +187,7 @@ function draw(){
     if(currentUser !== null){
       let best = getBestScore(currentUser);
       textSize(25);
-      fill(30)
+      fill(30);
       text(`Best Score: ${best}`, width / 2, height / 2 + 30);
     }
 
