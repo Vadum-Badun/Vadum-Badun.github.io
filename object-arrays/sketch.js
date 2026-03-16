@@ -1,14 +1,20 @@
 // "Put in order" Object Arrays
 // Vadym Kolomiiets
-// 10/03/2026
+// 18/03/2026
 //
 //Extra for Experts: Usage of HTML DOM elements, such as entering the user name
 //Extra for Experts: Usage of local storage to save the scores of players
-// IMPORTANT NOTE FOR Mr. Schellenberg: As you could notice, it's just a better version
+
+
+//-------------------------------- IMPORTANT NOTE FOR Mr. Schellenberg:-------------------------------------------------------------------------------
+//  
+//As you could notice, it's just a better version
 //of previous project. So you should consider ONLY changes on lines 36 until line 192
 //as it's the only part where new functions were implemented. I don't want to waste your time for no reason!
+//
+//--------------------------------END OF NOTE---------------------------------------------------------------------------------------------
 
-// --------------------------CREDENTIALS SECTION--------------------------------------------
+// --------------------------CREDENTIALS SECTION----------------------------------------------------------------------------------------------
 
 //https://www.reddit.com/r/p5js/comments/1jdtnfr/how_to_remove_input_box/ 
 // https://stackoverflow.com/questions/48936886/how-do-i-save-an-array-to-a-file-and-manipulate-it-from-within-my-code 
