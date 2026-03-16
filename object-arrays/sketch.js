@@ -5,7 +5,7 @@
 //Extra for Experts: Usage of HTML DOM elements, such as entering the user name
 //Extra for Experts: Usage of local storage to save the scores of players
 // IMPORTANT NOTE FOR Mr. Schellenberg: As you could notice, it's just a better version
-//of previous project. So you should consider ONLY changes on lines 26 until line 189
+//of previous project. So you should consider ONLY changes on lines 36 until line 192
 //as it's the only part where new functions were implemented. I don't want to waste your time for no reason!
 
 // --------------------------CREDENTIALS SECTION--------------------------------------------
@@ -190,6 +190,8 @@ function draw(){
       fill(30);
       text(`Best Score: ${best}`, width / 2, height / 2 + 30);
     }
+
+    //--------------------------------------------NOTHING CHANGED UNDER THIS LINE-----------------------------------------------------------------------------
 
     // Creates only one button, so it doesn't duplicate
     if(button === null){
