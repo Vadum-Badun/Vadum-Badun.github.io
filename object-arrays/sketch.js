@@ -44,27 +44,42 @@ let myInput;
 let currentUser = null;
 let gameStart = false;
 
-function setup(){
-  createCanvas(500, 500);
-  player = new Player();
-  bar = new Bar();
-  places.push(new Place());
+let storage = {
+//Saving userList array to local storage
+ saveUsers(){
+  localStorage.setItem(`userList`, JSON.stringify(userList));
+},
 
+//Loads saved user list from local storage into the array
+loadUsers(){
+  let stored = localStorage.getItem('userList');
+  if(stored){
+    userList = JSON.parse(stored);
+  }
+},
 
-  loadUsers();
- 
-  myInput = createInput('Enter your name');
-  myInput.position(width/2 -90, height/2);
-  submitButton = createButton('Submit');
-  submitButton.position(myInput.x + 60, height / 2 + 50);
-  submitButton.mousePressed(saveInput);
+//Return stored best score for specific username
+  getBestScore(name){
+  let key = `bestScore_` + name;
+  let stored = localStorage.getItem(key);
+  return stored ? parseInt(stored) : 0;
+},
+
+//Updates the best for user
+updateBestScore(name, score){
+  let key = `bestScore_` + name;
+  let current = storage.getBestScore(name);
+  if(score > current){
+    localStorage.setItem(key,score);
+  }
   
-
 }
+};
 
 function saveInput(){
   let userInput = myInput.value();
 
+  
   //We shouldn't allow empty names, exit the function:
   if(userInput === '') {
     return;
@@ -74,7 +89,7 @@ function saveInput(){
 
   if(!userList.includes(userInput)){
     userList.push(userInput);
-    saveUsers();
+    storage.saveUsers();
     
   }
 
@@ -85,34 +100,22 @@ function saveInput(){
   gameStart = true;
 }
 
-//Saving userList array to local storage
-function saveUsers(){
-  localStorage.setItem(`userList`, JSON.stringify(userList));
-}
+function setup(){
+  createCanvas(500, 500);
+  player = new Player();
+  bar = new Bar();
+  places.push(new Place());
 
-//Loads saved user list from local storage into the array
-function loadUsers(){
-  let stored = localStorage.getItem('userList');
-  if(stored){
-    userList = JSON.parse(stored);
-  }
-}
 
-//Return stored best score for specific username
-function getBestScore(name){
-  let key = `bestScore_` + name;
-  let stored = localStorage.getItem(key);
-  return stored ? parseInt(stored) : 0;
-}
-
-//Updates the best for user
-function updateBestScore(name, score){
-  let key = `bestScore_` + name;
-  let current = getBestScore(name);
-  if(score > current){
-    localStorage.setItem(key,score);
-  }
+  storage.loadUsers();
+ 
+  myInput = createInput('Enter your name');
+  myInput.position(width/2 -90, height/2);
+  submitButton = createButton('Submit');
+  submitButton.position(myInput.x + 60, height / 2 + 50);
+  submitButton.mousePressed(saveInput);
   
+
 }
 
 function draw(){
@@ -154,7 +157,7 @@ function draw(){
 
     //Show user's best score
     if(currentUser !== null){
-      let best = getBestScore(currentUser);
+      let best = storage.getBestScore(currentUser);
       textAlign(CENTER);
       textSize(16);
       fill(30);
@@ -175,7 +178,7 @@ function draw(){
 
     //Save best score
     if(currentUser !== null){
-      updateBestScore(currentUser, points);
+      storage.updateBestScore(currentUser, points);
     }
     
     //Stops the draw loop
@@ -191,7 +194,7 @@ function draw(){
 
 
     if(currentUser !== null){
-      let best = getBestScore(currentUser);
+      let best = storage.getBestScore(currentUser);
       textSize(25);
       fill(30);
       text(`Best Score: ${best}`, width / 2, height / 2 + 30);
