@@ -5,6 +5,7 @@
 - [Ball Array](04-ball-array)
 - [Generative Art](gen-art)
 - [2d Grid](grid-demo)
+- [Rectengular Grid](rect-grid)
 
 
 ## Assignments
