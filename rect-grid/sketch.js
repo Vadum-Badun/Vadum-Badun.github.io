@@ -55,7 +55,7 @@ function displayGrid(){
 
 function toggleCell(x, y){
   if( x>= 0 && x < cols && y >= 0 && y < rows){
-    if(grid[y][x] ==e= 1){
+    if(grid[y][x] === 1){
       grid[y][x] = 0;
     }
     else if (grid[y][x] === 0) {
