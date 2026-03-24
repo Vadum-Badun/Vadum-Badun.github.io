@@ -12,3 +12,4 @@
 ## Assignments
 - [Interactive scene](interactive-scene)
 - [Object Notation and Arrays](object-arrays)
+- [2d Grid](grid-based)
