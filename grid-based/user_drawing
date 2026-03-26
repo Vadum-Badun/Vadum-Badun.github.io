@@ -1,0 +1,20 @@
+// Grid based drawing
+// Vadym Kolomiiets
+// Date
+//
+// Extra for Experts:
+// Adapting Python code into JS
+
+//----------------------------------------------------CREDITS--------------------------------------------------
+//
+//
+//--------------------------------------------------END OF CREDITS---------------------------------------------
+
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+}
+
+function draw() {
+  background(220);
+}
