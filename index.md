@@ -7,6 +7,8 @@
 - [2d Grid](grid-demo)
 - [Rectengular Grid](rect-grid)
 - [Game of Life](game-life)
+- [Walkers Demo](walker-dem)
+- [Fireworks OOP](fireworks-dem)
 
 
 ## Assignments
