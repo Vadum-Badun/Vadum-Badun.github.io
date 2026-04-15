@@ -1,5 +1,4 @@
 # CS 30 Work
-
 ## Demos
 - add demos here
 - [Ball Array](04-ball-array)
@@ -15,3 +14,17 @@
 - [Interactive scene](interactive-scene)
 - [Object Notation and Arrays](object-arrays)
 - [2d Grid](grid-based)
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script src="sketch.js"></script>
+  </body>
+</html>

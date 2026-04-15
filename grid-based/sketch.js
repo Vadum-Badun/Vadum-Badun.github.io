@@ -2,11 +2,17 @@
 // Vadym Kolomiiets
 // Date 04/15/2026
 //
-// Extra for Expert:
+// Extra for Expert: Added Music to the game, which plays without local file
 //
 //----------------------------------------------------CREDITS--------------------------------------------------
 // https://youtu.be/GTWrWM1UsnA?si=TCFLqeE1PYHtJNuw
 //--------------------------------------------------END OF CREDITS---------------------------------------------
+
+let bgMusic;
+
+function preload() {
+  bgMusic = loadSound('https://cdn.freecodecamp.org/curriculum/js-music-player/scratching-the-surface.mp3');
+}
 
 let board;
 let humanPlayer = 'X';
@@ -20,6 +26,7 @@ let available;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   resetGame();
+  bgMusic.loop();
 }
 
 function draw() {
@@ -71,6 +78,7 @@ function resetGame() {
       available.push([i, j]);
   currentPlayer = humanPlayer;
   gameOver = false;
+  if (bgMusic && !bgMusic.isPlaying()) bgMusic.loop();
 }
 
 //Makes AI to choose random spot
@@ -95,7 +103,6 @@ function drawGrid() {
   strokeWeight(3);
   stroke(80);
 
-  //Draw us two vertical and horizontal lines
   for (let i = 1; i < 3; i++) {
     line(w * i, 0, w * i, height);
     line(0, h * i, width, h * i);
@@ -165,9 +172,4 @@ function checkWinner() {
   }
 
   return null;
-}
-
-
-
-
-       
+}    
