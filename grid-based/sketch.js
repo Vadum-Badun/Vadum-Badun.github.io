@@ -37,21 +37,29 @@ function draw() {
 
 //Player move
 function mousePressed() {
-  if (gameOver || currentPlayer !== humanPlayer) return;
+  if (gameOver || currentPlayer !== humanPlayer) {
+    return;
+  }
 
   // Convert pixel position to grid cell
   let col = floor(mouseX / (width / 3));
   let row = floor(mouseY / (height / 3));
 
   // Ignore clicks outside the grid and taken cells
-  if (col < 0 || col > 2 || row < 0 || row > 2) return;
-  if (board[row][col] !== '') return;
+  if (col < 0 || col > 2 || row < 0 || row > 2) {
+    return;
+  }
+  if (board[row][col] !== '') {
+    return;
+  }
 
   // Place players move and remove this cell from list
   available.splice(available.findIndex(([r, c]) => r === row && c === col), 1);
   board[row][col] = humanPlayer;
 
-  if (checkWinner() !== null) { gameOver = true; return; }
+  if (checkWinner() !== null) {
+    gameOver = true; return; 
+  }
 
   currentPlayer = aiPlayer;
   setTimeout(aiMove, 200);
@@ -63,33 +71,43 @@ function mousePressed() {
 //----------------------------------------------------GAME LOGIC----------------------------------------------------
 
 function mouseReleased() {
-  if (gameOver) resetGame();
+  if (gameOver) {
+    resetGame();
+  }
 }
 
 //Reset the game
 function resetGame() {
   board =
   [['', '', ''], 
-  ['', '', ''], 
-  ['', '', '']];
+    ['', '', ''], 
+    ['', '', '']];
   available = [];
-  for (let i = 0; i < 3; i++)
-    for (let j = 0; j < 3; j++)
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
       available.push([i, j]);
+    }
+  }
   currentPlayer = humanPlayer;
   gameOver = false;
-  if (bgMusic && !bgMusic.isPlaying()) bgMusic.loop();
+  if (bgMusic && !bgMusic.isPlaying()) {
+    bgMusic.loop();
+  }
 }
 
 //Makes AI to choose random spot
 function aiMove() {
-  if (gameOver) return;
+  if (gameOver) {
+    return;
+  }
 
   let index = floor(random(available.length));
   let spot = available.splice(index, 1)[0];
   board[spot[0]][spot[1]] = aiPlayer;
 
-  if (checkWinner() !== null) { gameOver = true; return; }
+  if (checkWinner() !== null) {
+    gameOver = true; return; 
+  }
 
   currentPlayer = humanPlayer;
 }
@@ -116,7 +134,9 @@ function drawPieces() {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       let spot = board[i][j];
-      if (spot === '') continue;
+      if (spot === '') {
+        continue;
+      }
 
       let x = w * j + w / 2;
       let y = h * i + h / 2;
@@ -126,7 +146,8 @@ function drawPieces() {
         noFill();
         stroke(50, 100, 200);
         ellipse(x, y, w / 2);
-      } else {
+      }
+      else {
         stroke(200, 60, 60);
         let s = w / 4;
         line(x - s, y - s, x + s, y + s);

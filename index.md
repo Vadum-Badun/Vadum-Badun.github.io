@@ -8,6 +8,7 @@
 - [Game of Life](game-life)
 - [Walkers Demo](walker-dem)
 - [Fireworks OOP](fireworks-dem)
+- [Ball Collision OOP](ball-oop)
 
 
 ## Assignments
