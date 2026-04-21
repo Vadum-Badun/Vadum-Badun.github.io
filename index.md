@@ -9,6 +9,7 @@
 - [Walkers Demo](walker-dem)
 - [Fireworks OOP](fireworks-dem)
 - [Ball Collision OOP](ball-oop)
+- [Connected Nodes](nodes-oop)
 
 
 ## Assignments
