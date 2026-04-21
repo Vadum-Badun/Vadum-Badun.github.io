@@ -46,34 +46,34 @@ let gameStart = false;
 
 let storage = {
 //Saving userList array to local storage
- saveUsers(){
-  localStorage.setItem(`userList`, JSON.stringify(userList));
-},
+  saveUsers(){
+    localStorage.setItem(`userList`, JSON.stringify(userList));
+  },
 
-//Loads saved user list from local storage into the array
-loadUsers(){
-  let stored = localStorage.getItem('userList');
-  if(stored){
-    userList = JSON.parse(stored);
-  }
-},
+  //Loads saved user list from local storage into the array
+  loadUsers(){
+    let stored = localStorage.getItem('userList');
+    if(stored){
+      userList = JSON.parse(stored);
+    }
+  },
 
-//Return stored best score for specific username
+  //Return stored best score for specific username
   getBestScore(name){
-  let key = `bestScore_` + name;
-  let stored = localStorage.getItem(key);
-  return stored ? parseInt(stored) : 0;
-},
+    let key = `bestScore_` + name;
+    let stored = localStorage.getItem(key);
+    return stored ? parseInt(stored) : 0;
+  },
 
-//Updates the best for user
-updateBestScore(name, score){
-  let key = `bestScore_` + name;
-  let current = storage.getBestScore(name);
-  if(score > current){
-    localStorage.setItem(key,score);
-  }
+  //Updates the best for user
+  updateBestScore(name, score){
+    let key = `bestScore_` + name;
+    let current = storage.getBestScore(name);
+    if(score > current){
+      localStorage.setItem(key,score);
+    }
   
-}
+  }
 };
 
 function saveInput(){
