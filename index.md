@@ -1,6 +1,5 @@
 # CS 30 Work
 ## Demos
-- add demos here
 - [Ball Array](04-ball-array)
 - [Generative Art](gen-art)
 - [2d Grid](grid-demo)
@@ -10,6 +9,7 @@
 - [Fireworks OOP](fireworks-dem)
 - [Ball Collision OOP](ball-oop)
 - [Connected Nodes](nodes-oop)
+- [Inheritance](inh-oop)
 
 
 ## Assignments
